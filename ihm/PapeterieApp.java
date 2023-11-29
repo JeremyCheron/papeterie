@@ -9,7 +9,8 @@ public class PapeterieApp {
 
 			@Override
 			public void run() {
-				new EcranArticle();
+				ArticleController controller = new ArticleController();
+				controller.startApp();
 			}
 			
 		});
