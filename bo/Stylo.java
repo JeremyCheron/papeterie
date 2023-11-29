@@ -3,6 +3,10 @@ public class Stylo extends Article{
 
     private String couleur;
 
+    public Stylo() {
+        
+    }
+
     public Stylo(Integer idArticle, String marque, String ref, String designation, float pu, int qte, String couleur)  {
 		
 		setIdArticle(idArticle);

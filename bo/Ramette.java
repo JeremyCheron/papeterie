@@ -20,6 +20,9 @@ public class Ramette extends Article {
 
     //getters and setters
 
+    public Ramette() {
+    }
+
     public int getGrammage() {
         return grammage;
     }
