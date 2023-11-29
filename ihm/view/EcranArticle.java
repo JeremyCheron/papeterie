@@ -1,4 +1,4 @@
-package fr.eni.papeterie.ihm;
+package fr.eni.papeterie.ihm.view;
 
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -331,7 +331,7 @@ public class EcranArticle extends JFrame{
     public JButton getBtnPrecedent() {
 		if (btnPrecedent == null) {
 			btnPrecedent = new JButton();
-			ImageIcon image = new ImageIcon(this.getClass().getResource("ressources/Back24.gif"));
+			ImageIcon image = new ImageIcon(this.getClass().getResource("../ressources/Back24.gif"));
 			btnPrecedent.setIcon(image);
 			btnPrecedent.addActionListener(new ActionListener() {
 
@@ -348,7 +348,7 @@ public class EcranArticle extends JFrame{
     public JButton getBtnNouveau() {
 		if (btnNouveau == null) {
 			btnNouveau = new JButton();
-			ImageIcon image = new ImageIcon(this.getClass().getResource("ressources/New24.gif"));
+			ImageIcon image = new ImageIcon(this.getClass().getResource("../ressources/New24.gif"));
 			btnNouveau.setIcon(image);
 			btnNouveau.addActionListener(new ActionListener() {
 
@@ -366,7 +366,7 @@ public class EcranArticle extends JFrame{
     public JButton getBtnEnregistrer() {
 		if (btnEnregistrer == null) {
 			btnEnregistrer = new JButton();
-			ImageIcon image = new ImageIcon(this.getClass().getResource("ressources/Save24.gif"));
+			ImageIcon image = new ImageIcon(this.getClass().getResource("../ressources/Save24.gif"));
 			btnEnregistrer.setIcon(image);
 			btnEnregistrer.addActionListener(new ActionListener() {
 
@@ -385,7 +385,7 @@ public class EcranArticle extends JFrame{
     public JButton getBtnSupprimer() {
 		if (btnSupprimer == null) {
 			btnSupprimer = new JButton();
-			ImageIcon image = new ImageIcon(this.getClass().getResource("ressources/Delete24.gif"));
+			ImageIcon image = new ImageIcon(this.getClass().getResource("../ressources/Delete24.gif"));
 			btnSupprimer.setIcon(image);
 			btnSupprimer.addActionListener(new ActionListener() {
 
@@ -403,7 +403,7 @@ public class EcranArticle extends JFrame{
     public JButton getBtnSuivant() {
 		if (btnSuivant == null) {
 			btnSuivant = new JButton();
-			ImageIcon image = new ImageIcon(this.getClass().getResource("ressources/Forward24.gif"));
+			ImageIcon image = new ImageIcon(this.getClass().getResource("../ressources/Forward24.gif"));
 			btnSuivant.setIcon(image);
 			btnSuivant.addActionListener(new ActionListener() {
 

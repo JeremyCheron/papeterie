@@ -1,4 +1,4 @@
-package fr.eni.papeterie.ihm;
+package fr.eni.papeterie.ihm.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +7,7 @@ import java.util.List;
 import fr.eni.papeterie.bll.BLLException;
 import fr.eni.papeterie.bll.CatalogueManager;
 import fr.eni.papeterie.bo.Article;
+import fr.eni.papeterie.ihm.view.EcranArticle;
 
 public class ArticleController {
     
