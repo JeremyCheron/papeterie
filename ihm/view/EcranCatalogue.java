@@ -10,14 +10,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import fr.eni.papeterie.bo.Article;
+import fr.eni.papeterie.ihm.observer.ICatalogueObserver;
 
 @SuppressWarnings("serial")
-public class EcranCatalogue extends JFrame{
+public class EcranCatalogue extends JFrame implements ICatalogueObserver{
 
     private TableCatalogue tblCatalogue;
 
     public EcranCatalogue() {
         super("Catalogue");
+
+        ObserverEvent.getInstance().catalogueOberservers.add(this);
 
         setSize(600, 300);
         setLocationRelativeTo(null);
@@ -42,6 +45,21 @@ public class EcranCatalogue extends JFrame{
 
     public void popup(String msg, String title, int Logo) {
         JOptionPane.showMessageDialog(EcranCatalogue.this, msg, title, Logo);
+    }
+
+    public TableCatalogue getTblCatalogue() {
+        return tblCatalogue;
+    }
+
+    @Override
+    public void miseAJourDesDonnees(List<Article> articles) {
+        try {
+            this.getTblCatalogue().setModel(new TableCatalogueModel(articles));
+			this.getTblCatalogue().miseAJour();
+		} catch (Exception e) {
+			this.popup(e.getMessage(), "Erreut Technique", JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
+		}
     }
 
 }

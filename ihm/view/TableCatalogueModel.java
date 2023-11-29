@@ -56,9 +56,4 @@ public class TableCatalogueModel extends AbstractTableModel{
         }
         return val;
     }
-
-    
-
-
-
 }

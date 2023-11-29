@@ -495,10 +495,13 @@ public class EcranArticle extends JFrame{
                 catalogue.add(articleAffiche);
                 afficherArticle(articleAffiche);
                 information("Nouvel article enregistré.");
+                ObserverEvent.getInstance().onUpdateCatalogue(catalogue);
             } else {
                 mgr.updateArticle(articleAffiche);
                 catalogue.set(indexCatalogue, articleAffiche);
                 information("Mise à jour effectuée.");
+                ObserverEvent.getInstance().onUpdateCatalogue(catalogue);
+
             }
         } catch (BLLException e) {
             infoErreur(e.getMessage());
@@ -511,6 +514,8 @@ public class EcranArticle extends JFrame{
             mgr.removeArticle(id);
             catalogue.remove(indexCatalogue);
             information("Suppression de l'article réalisée.");
+            ObserverEvent.getInstance().onUpdateCatalogue(catalogue);
+
         } catch (BLLException e) {
             infoErreur(e.getMessage());
         }
