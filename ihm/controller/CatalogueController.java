@@ -23,14 +23,5 @@ public class CatalogueController {
 			ecran.popup(e.getMessage(), "Erreur Technique", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
-	public void onUpdate() {
-		try {
-			ecran.miseAJourDesDonnees(mger.getCatalogue());
-		} catch (Exception e) {
-
-		}
-	}
-
 	
 }
