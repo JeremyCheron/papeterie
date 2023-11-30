@@ -63,7 +63,15 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
         try (Connection connection = JdbcTools.getConnection();
             PreparedStatement query = connection.prepareStatement(SQL_UPDATE);) {
 
-            ArticleDAOHelper.setUpdateParameters(query, article);
+            ArticleDAOHelper.setCommonArticleParameters(query, article);
+
+            if (article instanceof Ramette) {
+                ArticleDAOHelper.setRametteParameters(query, (Ramette) article);
+            } else if (article instanceof Stylo) {
+                ArticleDAOHelper.setStyloParameters(query, (Stylo) article);
+            }
+
+            query.setInt(9, article.getIdArticle());
             query.executeUpdate();
 
         } catch (Exception e) {

@@ -46,18 +46,6 @@ public class ArticleDAOHelper {
         query.setString(8, stylo.getCouleur());
     }
 
-    public static void setUpdateParameters(PreparedStatement query, Article article) throws SQLException {
-        setCommonArticleParameters(query, article);
-    
-        if (article instanceof Ramette) {
-            setRametteParameters(query, (Ramette) article);
-        } else if (article instanceof Stylo) {
-            setStyloParameters(query, (Stylo) article);
-        }
-    
-        query.setInt(9, article.getIdArticle());
-    }
-
     // method to map ResultSet to Article
     public static Article mapResultSetToArticle(ResultSet resultSet) throws SQLException {
         Article article = null;
