@@ -21,11 +21,11 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import fr.eni.papeterie.bll.BLLException;
 import fr.eni.papeterie.bll.CatalogueManager;
 import fr.eni.papeterie.bo.Article;
 import fr.eni.papeterie.bo.Ramette;
 import fr.eni.papeterie.bo.Stylo;
+import fr.eni.papeterie.ihm.controller.ArticleController;
 
 @SuppressWarnings("serial")
 public class EcranArticle extends JFrame{
@@ -53,8 +53,17 @@ public class EcranArticle extends JFrame{
     private List<Article> catalogue;
 
     private int indexCatalogue;
+    private ArticleController articleController;
 
-    public EcranArticle() {
+    public void setArticleController(ArticleController articleController) {
+        this.articleController = articleController;
+    }
+
+    public CatalogueManager getCatalogueManager() {
+        return mgr;
+    }
+
+    public EcranArticle(ArticleController articleController) {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setSize(500, 400);
@@ -65,6 +74,7 @@ public class EcranArticle extends JFrame{
 		initData();
 		afficherPremierArticle();
 		setVisible(true);
+        this.articleController = articleController;
 	}
 
     private void initIhm() {
@@ -373,7 +383,7 @@ public class EcranArticle extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 
-					enregistrer();
+					articleController.enregistrer();
 
 				}
 
@@ -383,22 +393,20 @@ public class EcranArticle extends JFrame{
 	}
 
     public JButton getBtnSupprimer() {
-		if (btnSupprimer == null) {
-			btnSupprimer = new JButton();
-			ImageIcon image = new ImageIcon(this.getClass().getResource("../ressources/Delete24.gif"));
-			btnSupprimer.setIcon(image);
-			btnSupprimer.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					supprimer();
-
-				}
-
-			});
-		}
-		return btnSupprimer;
-	}
+        if (btnSupprimer == null) {
+            btnSupprimer = new JButton();
+            ImageIcon image = new ImageIcon(this.getClass().getResource("../ressources/Delete24.gif"));
+            btnSupprimer.setIcon(image);
+            
+            btnSupprimer.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                        articleController.supprimer();
+                }
+            });
+        }
+        return btnSupprimer;
+    }
 
     public JButton getBtnSuivant() {
 		if (btnSuivant == null) {
@@ -483,51 +491,6 @@ public class EcranArticle extends JFrame{
     public void nouveau() {
         indexCatalogue = catalogue.size();
         afficherNouveau();
-    }
-
-    public void enregistrer() {
-        Article articleAffiche = getArticle();
-
-        try {
-            if (articleAffiche.getIdArticle() == null) {
-                mgr.addArticle(articleAffiche);
-                System.out.println("article : " + articleAffiche);
-                catalogue.add(articleAffiche);
-                afficherArticle(articleAffiche);
-                information("Nouvel article enregistré.");
-                ObserverEvent.getInstance().onUpdateCatalogue(catalogue);
-            } else {
-                mgr.updateArticle(articleAffiche);
-                catalogue.set(indexCatalogue, articleAffiche);
-                information("Mise à jour effectuée.");
-                ObserverEvent.getInstance().onUpdateCatalogue(catalogue);
-
-            }
-        } catch (BLLException e) {
-            infoErreur(e.getMessage());
-        }
-    }
-
-    public void supprimer() {
-        try {
-            int id = catalogue.get(indexCatalogue).getIdArticle();
-            mgr.removeArticle(id);
-            catalogue.remove(indexCatalogue);
-            information("Suppression de l'article réalisée.");
-            ObserverEvent.getInstance().onUpdateCatalogue(catalogue);
-
-        } catch (BLLException e) {
-            infoErreur(e.getMessage());
-        }
-
-        if (indexCatalogue < catalogue.size()) {
-            afficherArticle(catalogue.get(indexCatalogue));
-        } else if (indexCatalogue > 0) {
-            indexCatalogue--;
-            afficherArticle(catalogue.get(indexCatalogue));
-        } else {
-            afficherNouveau();
-        }
     }
 
 }

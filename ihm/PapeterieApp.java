@@ -15,8 +15,10 @@ public class PapeterieApp {
 				ArticleController articleC = new ArticleController();
 				articleC.startApp();
 
+
 				CatalogueController catalogueC = new CatalogueController();
 				catalogueC.showEcranCatalogue();
+				articleC.addCatalogueObserver(catalogueC);
 			}
 
 		});

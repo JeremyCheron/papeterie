@@ -57,7 +57,7 @@ public class EcranCatalogue extends JFrame implements ICatalogueObserver{
             this.getTblCatalogue().setModel(new TableCatalogueModel(articles));
 			this.getTblCatalogue().miseAJour();
 		} catch (Exception e) {
-			this.popup(e.getMessage(), "Erreut Technique", JOptionPane.ERROR_MESSAGE);
+			this.popup(e.getMessage(), "Erreur Technique", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
     }
