@@ -9,14 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.papeterie.bo.Article;
-import fr.eni.papeterie.bo.Ramette;
-import fr.eni.papeterie.bo.Stylo;
-import fr.eni.papeterie.dal.ArticleDAO;
 import fr.eni.papeterie.dal.ArticleDAOHelper;
 import fr.eni.papeterie.dal.DALException;
+import fr.eni.papeterie.dal.DAO;
 import fr.eni.papeterie.dal.JdbcTools;
 
-public class ArticleDAOJdbcImpl implements ArticleDAO {
+public class ArticleDAOJdbcImpl implements DAO<Article> {
 
     private static final String SQL_INSERT = "INSERT INTO articles(reference,marque,designation,prixUnitaire,qteStock,type,grammage,couleur) VALUES(?,?,?,?,?,?,?,?)";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM articles WHERE idArticle = ?";
@@ -26,55 +24,37 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
     @Override
     public Article selectById(int idArticle) throws DALException {
-        try (Connection connection = JdbcTools.getConnection();
-            PreparedStatement query = connection.prepareStatement(SQL_SELECT_BY_ID);) {
-
+        try (PreparedStatement query = JdbcTools.preparedStatement(SQL_SELECT_BY_ID)) {
             query.setInt(1, idArticle);
-
             try (ResultSet resultSet = query.executeQuery()) {
                 return resultSet.next() ? ArticleDAOHelper.mapResultSetToArticle(resultSet) : null;
             }
-
         } catch (SQLException e) {
             throw new DALException("SelectById failed" + idArticle, e);
         }
     }
-    
+
     @Override
     public List<Article> selectAll() throws DALException {
         List<Article> articles = new ArrayList<>();
-        try (Connection connection = JdbcTools.getConnection();
-            Statement query = connection.createStatement();
+        try (Statement query = JdbcTools.createStatement();
             ResultSet resultSet = query.executeQuery(SQL_SELECT_ALL)) {
-
             while (resultSet.next()) {
                 articles.add(ArticleDAOHelper.mapResultSetToArticle(resultSet));
             }
-
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DALException("SelectAll failed - ", e);
         }
         return articles;
     }
 
-
     @Override
     public void update(Article article) throws DALException {
-        try (Connection connection = JdbcTools.getConnection();
-            PreparedStatement query = connection.prepareStatement(SQL_UPDATE);) {
-
-            ArticleDAOHelper.setCommonArticleParameters(query, article);
-
-            if (article instanceof Ramette) {
-                ArticleDAOHelper.setRametteParameters(query, (Ramette) article);
-            } else if (article instanceof Stylo) {
-                ArticleDAOHelper.setStyloParameters(query, (Stylo) article);
-            }
-
+        try (PreparedStatement query = JdbcTools.preparedStatement(SQL_UPDATE)) {
+            ArticleDAOHelper.setArticleParameters(query, article);
             query.setInt(9, article.getIdArticle());
             query.executeUpdate();
-
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DALException("Update article failed - " + article, e);
         }
     }
@@ -82,40 +62,25 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
     @Override
     public void insert(Article article) throws DALException {
         try (Connection connection = JdbcTools.getConnection();
-            PreparedStatement query = connection.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);) {
-
-            ArticleDAOHelper.setCommonArticleParameters(query, article);
-
-            if (article instanceof Ramette) {
-                ArticleDAOHelper.setRametteParameters(query, (Ramette) article);
-            } else if (article instanceof Stylo) {
-                ArticleDAOHelper.setStyloParameters(query, (Stylo) article);
-            }
-
+            PreparedStatement query = connection.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
+            ArticleDAOHelper.setArticleParameters(query, article);
             int nbRows = query.executeUpdate();
-
             if (nbRows == 0) {
                 throw new DALException("Insertion failed, no rows affected.");
             }
-
             ArticleDAOHelper.setGeneratedArticleId(query, article);
-
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DALException("Insert article failed - " + article, e);
         }
     }
 
     @Override
     public void delete(int idArticle) throws DALException {
-        try (Connection connection = JdbcTools.getConnection();
-            PreparedStatement query = connection.prepareStatement(SQL_DELETE)) {
-
+        try (PreparedStatement query = JdbcTools.preparedStatement(SQL_DELETE)) {
             query.setInt(1, idArticle);
             query.executeUpdate();
-
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DALException("Delete article failed - " + idArticle, e);
         }
     }
-
 }

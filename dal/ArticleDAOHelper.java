@@ -23,7 +23,15 @@ public class ArticleDAOHelper {
         return preparedStatement;
     }
 
-    //method to set common parameters for Article
+    public static void setArticleParameters(PreparedStatement query, Article article) throws SQLException {
+        setCommonArticleParameters(query, article);
+            if(article instanceof Ramette) {
+                setRametteParameters(query, (Ramette) article);
+            } else if(article instanceof Stylo) {
+                setStyloParameters(query, (Stylo) article);
+            }
+    }
+
     public static void setCommonArticleParameters(PreparedStatement query, Article article) throws SQLException {
         query.setString(1, article.getReference());
         query.setString(2, article.getMarque());
@@ -32,14 +40,12 @@ public class ArticleDAOHelper {
         query.setInt(5, article.getQteStock());
     }
 
-    //Method to set parameters for Ramette
     public static void setRametteParameters(PreparedStatement query, Ramette ramette) throws SQLException {
         query.setString(6, TYPE_RAMETTE);
         query.setInt(7, ramette.getGrammage());
         query.setNull(8, Types.VARCHAR);
     }
 
-    //Method to set parameters for Stylo
     public static void setStyloParameters(PreparedStatement query, Stylo stylo) throws SQLException {
         query.setString(6, TYPE_STYLO);
         query.setNull(7, Types.INTEGER);

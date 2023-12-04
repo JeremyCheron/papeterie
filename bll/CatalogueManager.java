@@ -5,11 +5,12 @@ import java.util.List;
 import fr.eni.papeterie.bo.Article;
 import fr.eni.papeterie.bo.Ramette;
 import fr.eni.papeterie.bo.Stylo;
-import fr.eni.papeterie.dal.ArticleDAO;
+//import fr.eni.papeterie.dal.ArticleDAO;
+import fr.eni.papeterie.dal.DAO;
 import fr.eni.papeterie.dal.DAOFactory;
 
 public class CatalogueManager {
-    private ArticleDAO daoArticle;
+    private DAO<Article> daoArticle;
     private static CatalogueManager instance;
 
     public static CatalogueManager getInstance() {
