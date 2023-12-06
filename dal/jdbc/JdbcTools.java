@@ -1,12 +1,12 @@
-package fr.eni.papeterie.dal;
+package fr.eni.papeterie.dal.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import java.sql.Statement;
 
-import java.sql.PreparedStatement;
+import fr.eni.papeterie.dal.Settings;
 
 
 public class JdbcTools {

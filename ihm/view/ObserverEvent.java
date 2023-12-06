@@ -13,7 +13,7 @@ public class ObserverEvent {
     public static ObserverEvent getInstance() {
         if (instance == null) {
             instance = new ObserverEvent();
-        } 
+        }
         return instance;
     }
 

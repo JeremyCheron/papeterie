@@ -12,7 +12,6 @@ import fr.eni.papeterie.bo.Article;
 import fr.eni.papeterie.dal.ArticleDAOHelper;
 import fr.eni.papeterie.dal.DALException;
 import fr.eni.papeterie.dal.DAO;
-import fr.eni.papeterie.dal.JdbcTools;
 
 public class ArticleDAOJdbcImpl implements DAO<Article> {
 
