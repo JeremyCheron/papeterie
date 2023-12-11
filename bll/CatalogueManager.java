@@ -14,11 +14,7 @@ public class CatalogueManager {
     private static CatalogueManager instance;
 
     public static CatalogueManager getInstance() {
-        if (instance == null) {
-            instance = new CatalogueManager();
-        }
-
-        return instance;
+        return (instance == null) ? (instance = new CatalogueManager()) : instance;
     }
 
     private CatalogueManager(){

@@ -84,7 +84,6 @@ public class EcranArticle extends JFrame{
 
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        //1
         gbc.gridy = 0;
         gbc.gridx = 0;
         panelPrincipal.add(new JLabel("Référence"), gbc);
@@ -92,7 +91,6 @@ public class EcranArticle extends JFrame{
         gbc.gridx = 1;
         panelPrincipal.add(getTxtReference(), gbc);
 
-        //2
         gbc.gridy = 1;
         gbc.gridx = 0;
         panelPrincipal.add(new JLabel("Désignation"), gbc);
@@ -100,7 +98,6 @@ public class EcranArticle extends JFrame{
         gbc.gridx = 1;
         panelPrincipal.add(getTxtDesignation(), gbc);
 
-        //3
         gbc.gridy = 2;
 		gbc.gridx = 0;
 		panelPrincipal.add(new JLabel("Marque"), gbc);
@@ -108,7 +105,6 @@ public class EcranArticle extends JFrame{
 		gbc.gridx = 1;
 		panelPrincipal.add(getTxtMarque(), gbc);
 
-        //4
         gbc.gridy = 3;
 		gbc.gridx = 0;
 		panelPrincipal.add(new JLabel("Stock"), gbc);
@@ -116,7 +112,6 @@ public class EcranArticle extends JFrame{
 		gbc.gridx = 1;
 		panelPrincipal.add(getTxtStock(), gbc);
 
-        //5
         gbc.gridy = 4;
 		gbc.gridx = 0;
 		panelPrincipal.add(new JLabel("Prix"), gbc);
@@ -124,7 +119,6 @@ public class EcranArticle extends JFrame{
 		gbc.gridx = 1;
 		panelPrincipal.add(getTxtPrix(), gbc);
 
-        //6
         gbc.gridy = 5;
 		gbc.gridx = 0;
 		panelPrincipal.add(new JLabel("Type"), gbc);
@@ -133,7 +127,6 @@ public class EcranArticle extends JFrame{
 		gbc.gridheight = 1;
 		panelPrincipal.add(getPanelType(), gbc);
 
-        //7
 		gbc.gridy = 6;
 		gbc.gridx = 0;
 		panelPrincipal.add(new JLabel("Grammage"), gbc);
@@ -141,7 +134,6 @@ public class EcranArticle extends JFrame{
 		gbc.gridx = 1;
 		panelPrincipal.add(getPanelGrammage(), gbc);
 
-		//8
 		gbc.gridy = 7;
 
 		gbc.gridx = 0;
@@ -150,7 +142,6 @@ public class EcranArticle extends JFrame{
 		gbc.gridx = 1;
 		panelPrincipal.add(getCboCouleur(), gbc);
 
-		//9
 		gbc.gridy = 8;
 
 		gbc.gridx = 0;
